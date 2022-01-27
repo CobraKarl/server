@@ -23,6 +23,8 @@ app.get("/user", isAuthenticated, (req, res) => {
 })
 
 app.use(notFound)
+app.use(errorHandler)
+
 function isAuthenticated(req, res, next) {
     req.query.admin === "true"
     ? res.send ("You are admin")
@@ -35,6 +37,17 @@ function notFound(req, res, next) {
     const error = new Error(`Not Found: ${req.originalUrl}`)
     res.status(404)
     next(error)
+}
+
+function errorHandler(error, req, res, next) {
+    const statuscode = res.statusCode === 200 ? 500 : res.statusCode
+    res.status(statuscode)
+    res.json ({
+        statuscode: statuscode,
+        message: error.message,
+        stacktrace: error.stack,
+    })
+
 }
 
 app.listen(port, () => {
