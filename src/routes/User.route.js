@@ -4,6 +4,7 @@ const routes =(app) => {
     app.post ("/user", UserController.creatUser)
     app.get ("/user", UserController.getAllUsers)
     app.get ("/user/:userId", UserController.getUserWithId)
+    app.get ("/searchuser", UserController.getUserWithUsernameQuery)
 }
 
 export default {
