@@ -54,9 +54,27 @@ const getUserWithUsernameQuery = async (req, res) => {
     }
 }
 
+const updateUser = async (req, res) => {
+    try {
+        if (!req.body) {return res.status(400).send({ message: "cannot update empy values" }) }
+        const respons = await UserModel.findByIdAndUpdate(req.params.userId, {
+            username: req.body.username,
+            password: req.body.password
+        }, { new: true})
+        res.status(200).send(respons)
+    } catch (error) {
+        res.status(500).send({
+            message: "Error occures while trying to update values of the user with ID: " + req.params.userId,
+            error: error.message
+        })
+
+    }
+}
+
 export default {
     creatUser,
     getAllUsers,
     getUserWithId,
-    getUserWithUsernameQuery
+    getUserWithUsernameQuery,
+    updateUser
 }
