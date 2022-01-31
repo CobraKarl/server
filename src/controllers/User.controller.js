@@ -7,7 +7,7 @@ const creatUser = async (req, res) => {
     })
 
     try {
-    const respons = user.save()
+    const respons = await user.save()
     res.status(201).send(respons)
 
     } catch (error) {

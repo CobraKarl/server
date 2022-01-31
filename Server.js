@@ -5,6 +5,7 @@ import morgan from "morgan"
 import bodyParser from "body-parser"
 import middelwares from "./src/middlewares/Middlewares.js"
 import Configuration from "./configuration/Configuration.js"
+import UserRoutes from "./src/routes/User.route.js"
 
 
 
@@ -19,6 +20,7 @@ app.get("/recipe", (req, res) => {
     res.send("Pancakes!")
 })
 
+UserRoutes.routes(app)
 app.use(middelwares.notFound)
 app.use(middelwares.errorHandler)
 
