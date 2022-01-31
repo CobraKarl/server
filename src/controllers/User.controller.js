@@ -15,7 +15,17 @@ const creatUser = async (req, res) => {
     }
 
 }
+const getAllUsers = async (req, res) => {
+    try {
+        const respons = await UserModel.find()
+        res.status (200).send(respons)
+    } catch (error) {
+        res.status(500).send ({ message: error.message })
+    }
+
+}
 
 export default {
-    creatUser
+    creatUser,
+    getAllUsers
 }
