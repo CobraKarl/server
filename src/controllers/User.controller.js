@@ -71,10 +71,26 @@ const updateUser = async (req, res) => {
     }
 }
 
+const deleteUser = async (req, res) => {
+    try {
+        const respons = await UserModel.findByIdAndDelete(req.params.userId)
+        res.status(200).send ({
+            message: `Sucessfully deleted the USER with username: ${respons.username} and ID: ${req.params.userId}`
+        })
+    } catch (error){
+        res.status(500).send ({
+            message: "Error occured while trying to delete user with ID: " + req.params.userId,
+            error: error.message
+        })
+
+    }
+}
+
 export default {
     creatUser,
     getAllUsers,
     getUserWithId,
     getUserWithUsernameQuery,
-    updateUser
+    updateUser,
+    deleteUser
 }
