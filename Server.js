@@ -26,3 +26,5 @@ app.use(middelwares.errorHandler)
 
 Configuration.connectToDatabsase ()
 Configuration.connectToPort (app)
+
+export default app
